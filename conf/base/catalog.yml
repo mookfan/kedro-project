@@ -16,3 +16,15 @@ shuttles:
   filepath: data/01_raw/shuttles.xlsx
   load_args:
     engine: openpyxl # Use modern Excel engine (the default since Kedro 0.18.0)
+
+cat:
+  type: kedro_project.extras.datasets.image_dataset.ImageDataSet
+  filepath: data/01_raw/cats/images/cat.0.jpg
+  # Note: the duplicated `images` path is part of the original Kaggle dataset
+
+animal:
+  type: PartitionedDataSet
+  dataset: kedro_project.extras.datasets.image_dataset.ImageDataSet
+  path: data/01_raw/cats/images
+  filename_suffix: ".jpg"
+  # Note: this is example for reading all images in dataset directory
