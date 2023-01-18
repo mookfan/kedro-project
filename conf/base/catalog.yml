@@ -28,3 +28,9 @@ animal:
   path: data/01_raw/cats/images
   filename_suffix: ".jpg"
   # Note: this is example for reading all images in dataset directory
+
+cat-ver:
+  type: kedro_project.extras.datasets.image_dataset_versioning.ImageDataSet
+  filepath: data/01_raw/cats/images/cat.0.jpg
+  versioned: true
+  # Note: example of data versioning

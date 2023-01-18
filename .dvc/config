@@ -1,0 +1,5 @@
+[core]
+    remote = minio
+['remote "minio"']
+    url = s3://gigi/cat
+    endpointurl = http://192.168.1.26:9000

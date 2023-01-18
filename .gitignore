@@ -13,6 +13,9 @@ conf/**/*credentials*
 data/**
 logs/**
 
+# except their dvc files
+!data/**/*.dvc
+
 # except their sub-folders
 !data/**/
 !logs/**/
