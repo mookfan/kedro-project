@@ -17,6 +17,18 @@ shuttles:
   load_args:
     engine: openpyxl # Use modern Excel engine (the default since Kedro 0.18.0)
 
+preprocessed_companies:
+  type: pandas.ParquetDataSet
+  filepath: data/02_intermediate/preprocessed_companies.pq
+
+preprocessed_shuttles:
+  type: pandas.ParquetDataSet
+  filepath: data/02_intermediate/preprocessed_shuttles.pq
+
+model_input_table:
+  type: pandas.ParquetDataSet
+  filepath: data/03_primary/model_input_table.pq
+
 cat:
   type: kedro_project.extras.datasets.image_dataset.ImageDataSet
   filepath: data/01_raw/cats/images/cat.0.jpg
@@ -34,3 +46,14 @@ cat-ver:
   filepath: data/01_raw/cats/images/cat.0.jpg
   versioned: true
   # Note: example of data versioning
+
+
+active_modelling_pipeline.regressor:
+  type: pickle.PickleDataSet
+  filepath: data/06_models/regressor_active.pickle
+  versioned: true
+
+candidate_modelling_pipeline.regressor:
+  type: pickle.PickleDataSet
+  filepath: data/06_models/regressor_candidate.pickle
+  versioned: true
