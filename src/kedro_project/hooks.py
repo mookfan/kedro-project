@@ -7,6 +7,8 @@ import mlflow
 import mlflow.sklearn
 from kedro.pipeline.node import Node
 
+import os
+
 def _normalise_mem_usage(mem_usage):
     # memory_profiler < 0.56.0 returns list instead of float
     return mem_usage[0] if isinstance(mem_usage, (list, tuple)) else mem_usage
@@ -58,6 +60,13 @@ class ModelTrackingHooks:
         """Hook implementation to start an MLflow run
         with the session_id of the Kedro pipeline run.
         """
+        # TODO: Make this configurable
+        import os 
+        os.environ['MLFLOW_S3_ENDPOINT_URL'] = ''
+        os.environ['AWS_ACCESS_KEY_ID'] = ''
+        os.environ['AWS_SECRET_ACCESS_KEY'] = ''
+        mlflow.set_tracking_uri('')
+
         mlflow.start_run(run_name=run_params["session_id"])
         mlflow.log_params(run_params)
 
@@ -79,7 +88,8 @@ class ModelTrackingHooks:
         elif node._func_name == "train_model":
             model = outputs[node._outputs]
             mlflow.sklearn.log_model(model, "model")
-            mlflow.log_params(inputs[params_name])
+            # ! Bug: mlflow.log_params(inputs[params_name])
+            # mlflow.log_params(inputs[params_name])
 
     @hook_impl
     def after_pipeline_run(self) -> None:
