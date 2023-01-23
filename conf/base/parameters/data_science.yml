@@ -1,5 +1,5 @@
 active_modelling_pipeline:
-    model_options:
+    input_options:
       test_size: 0.2
       random_state: 3
       features:
@@ -11,9 +11,12 @@ active_modelling_pipeline:
         - iata_approved
         - company_rating
         - review_scores_rating
+    model_options:
+      lr: 0.01
+
 
 candidate_modelling_pipeline:
-    model_options:
+    input_options:
       test_size: 0.2
       random_state: 8
       features:
@@ -21,3 +24,5 @@ candidate_modelling_pipeline:
         - passenger_capacity
         - crew
         - review_scores_rating
+    model_options:
+      lr: 0.01
